@@ -40,10 +40,10 @@ class Tabela extends Component {
   render() {
     const { autores, removeAutor } = this.props;
     return (
-      <tabe>
+      <table>
         <TableHead />
         <TableBody autores={autores} removeAutor={removeAutor} />
-      </tabe>
+      </table>
     );
   }
 }
