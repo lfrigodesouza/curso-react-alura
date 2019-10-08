@@ -14,14 +14,20 @@ const TableHead = () => {
 };
 
 const TableBody = props => {
-  const linhas = props.autores.map(autor => {
+  const linhas = props.autores.map((autor, index) => {
     return (
-      <tr>
+      <tr key={index}>
         <td>{autor.nome}</td>
         <td>{autor.livro}</td>
         <td>{autor.preco}</td>
         <td>
-          <button>Remover</button>
+          <button
+            onClick={() => {
+              props.removeAutor(index);
+            }}
+          >
+            Remover
+          </button>
         </td>
       </tr>
     );
@@ -32,11 +38,11 @@ const TableBody = props => {
 class Tabela extends Component {
   state = {};
   render() {
-    const { autores } = this.props;
+    const { autores, removeAutor } = this.props;
     return (
       <tabe>
         <TableHead />
-        <TableBody autores={autores} />
+        <TableBody autores={autores} removeAutor={removeAutor} />
       </tabe>
     );
   }
