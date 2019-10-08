@@ -28,34 +28,53 @@ class Formulario extends Component {
 
     return (
       <form>
-        <label htmlFor='nome'>Nome</label>
-        <input
-          id='nome'
-          type='text'
-          name='nome'
-          value={nome}
-          onChange={this.inputHandler}
-        />
+        <div className='row'>
+          <div className='input-field col s4'>
+            <label className='input-field' htmlFor='nome'>
+              Nome
+            </label>
+            <input
+              className='validate'
+              id='nome'
+              type='text'
+              name='nome'
+              value={nome}
+              onChange={this.inputHandler}
+            />
+          </div>
+          <div className='input-field col s4'>
+            <label className='input-field' htmlFor='livro'>
+              Livro
+            </label>
+            <input
+              className='validate'
+              id='livro'
+              type='text'
+              name='livro'
+              value={livro}
+              onChange={this.inputHandler}
+            />
+          </div>
+          <div className='input-field col s4'>
+            <label className='input-field' htmlFor='preco'>
+              Preço
+            </label>
+            <input
+              className='validate'
+              id='preco'
+              type='text'
+              name='preco'
+              value={preco}
+              onChange={this.inputHandler}
+            />
+          </div>
+        </div>
 
-        <label htmlFor='livro'>Livro</label>
-        <input
-          id='livro'
-          type='text'
-          name='livro'
-          value={livro}
-          onChange={this.inputHandler}
-        />
-
-        <label htmlFor='preco'>Preço</label>
-        <input
-          id='preco'
-          type='text'
-          name='preco'
-          value={preco}
-          onChange={this.inputHandler}
-        />
-
-        <button type='button' onClick={this.submitForm}>
+        <button
+          type='button'
+          onClick={this.submitForm}
+          className='waves-effect waves-light orange lighten-2 btn'
+        >
           Salvar
         </button>
       </form>
