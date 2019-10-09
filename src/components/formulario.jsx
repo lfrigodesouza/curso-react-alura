@@ -1,19 +1,39 @@
 import React, { Component } from 'react';
 import FormValidator from '../validator/formValidator';
+import PopUp from '../popUp';
 
 class Formulario extends Component {
   constructor(props) {
     super(props);
+    this.validador = new FormValidator([
+      {
+        campo: 'nome',
+        metodo: 'isEmpty',
+        validoQuando: false,
+        mensagem: 'Informe um nome'
+      },
+      {
+        campo: 'livro',
+        metodo: 'isEmpty',
+        validoQuando: false,
+        mensagem: 'Livro inválido'
+      },
+      {
+        campo: 'preco',
+        metodo: 'isInt',
+        validoQuando: true,
+        args: [{ min: 0, max: 9999 }],
+        mensagem: 'Entre com um valor numérico'
+      }
+    ]);
+
     this.stateInicial = {
       nome: '',
       livro: '',
-      preco: ''
+      preco: '',
+      validacao: this.validador.valid()
     };
     this.state = this.stateInicial;
-    this.validador = new FormValidator({
-      campo: 'nome',
-      metodo: 'isEmpty'
-    });
   }
 
   inputHandler = evt => {
@@ -24,11 +44,19 @@ class Formulario extends Component {
   };
 
   submitForm = () => {
-    if (this.validador.valida(this.state)) {
+    const validacao = this.validador.valida(this.state);
+    if (validacao.isValid) {
       this.props.estutadorDeSubmit(this.state);
       this.setState(this.stateInicial);
     } else {
-      console.log('Submit bloqueado');
+      const { nome, livro, preco } = validacao;
+      const campos = [nome, livro, preco];
+      const camposInvalidos = campos.filter(campo => {
+        return campo.isInvalid;
+      });
+      camposInvalidos.forEach(campo => {
+        PopUp.exibeMensagem('error', campo.message);
+      });
     }
   };
 

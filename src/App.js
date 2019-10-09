@@ -4,6 +4,7 @@ import Formulario from './components/formulario';
 import './App.css';
 import Header from './components/header';
 import 'materialize-css/dist/css/materialize.min.css';
+import M from './popUp';
 
 class App extends Component {
   state = {
@@ -39,10 +40,12 @@ class App extends Component {
         return index !== indexAutor;
       })
     });
+    M.exibeMensagem('removed', 'Registro removido');
   };
 
   submitHandler = autor => {
     this.setState({ autores: [...this.state.autores, autor] });
+    M.exibeMensagem('success', 'Cadastro realizado com sucesso!');
   };
 
   render() {
