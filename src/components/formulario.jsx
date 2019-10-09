@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import FormValidator from '../validator/formValidator';
 
 class Formulario extends Component {
   constructor(props) {
@@ -9,6 +10,10 @@ class Formulario extends Component {
       preco: ''
     };
     this.state = this.stateInicial;
+    this.validador = new FormValidator({
+      campo: 'nome',
+      metodo: 'isEmpty'
+    });
   }
 
   inputHandler = evt => {
@@ -19,8 +24,12 @@ class Formulario extends Component {
   };
 
   submitForm = () => {
-    this.props.estutadorDeSubmit(this.state);
-    this.setState(this.stateInicial);
+    if (this.validador.valida(this.state)) {
+      this.props.estutadorDeSubmit(this.state);
+      this.setState(this.stateInicial);
+    } else {
+      console.log('Submit bloqueado');
+    }
   };
 
   render() {

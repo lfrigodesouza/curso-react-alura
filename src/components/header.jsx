@@ -7,7 +7,7 @@ const Header = () => {
         <a href='/' className='brand-logo'>
           Meus Livros
         </a>
-        <ul class='right'>
+        <ul className='right'>
           <li>
             <a href='/autores'>Autores</a>
           </li>
